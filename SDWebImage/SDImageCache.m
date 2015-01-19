@@ -78,7 +78,7 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
         _diskCachePath = [paths[0] stringByAppendingPathComponent:fullNamespace];
 
         // Set decompression to YES
-        _shouldDecompressImages = YES;
+        _shouldDecompressImages = NO;
 
         dispatch_sync(_ioQueue, ^{
             _fileManager = [NSFileManager new];
@@ -153,7 +153,6 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     }
 
     [self.memCache setObject:image forKey:key cost:image.size.height * image.size.width * image.scale * image.scale];
-
     if (toDisk) {
         dispatch_async(self.ioQueue, ^{
             NSData *data = imageData;
